@@ -1,0 +1,6 @@
+rootProject.name = 'gradle-integration-test-plugin-sample'
+
+include 'groovy-spock'
+include 'java-junit4'
+include 'java-junit5'
+include 'kotlin-junit5'

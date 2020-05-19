@@ -1,0 +1,12 @@
+plugins {
+    id 'groovy'
+    id 'com.coditory.integration-test' version '1.1.6'
+}
+
+dependencies {
+    testCompile 'org.spockframework:spock-core:2.0-M2-groovy-3.0'
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
