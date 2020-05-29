@@ -1,6 +1,6 @@
 # Sample usage of [gradle-integration-test-plugin](https://github.com/coditory/gradle-integration-test-plugin)
 
-[![Build Status](https://travis-ci.org/coditory/gradle-integration-test-plugin-sample.svg?branch=master)](https://travis-ci.org/coditory/gradle-integration-test-plugin-sample)
+[![Build Status](https://travis-ci.com/coditory/gradle-integration-test-plugin-sample.svg?branch=master)](https://travis-ci.com/coditory/gradle-integration-test-plugin-sample)
 
 This project presents how to use [gradle-integration-test-plugin](https://github.com/coditory/gradle-integration-test-plugin)
 with different test frameworks:
