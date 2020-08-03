@@ -23,7 +23,7 @@ class ClasspathSetupIntegrationSpec extends Specification {
     }
 
     private String readFile(String name) throws Exception {
-        Path path = Paths.get(getClass().getClassLoader().getResource(name).toURI());
-        return Files.readString(path);
+        Path path = Paths.get(getClass().getClassLoader().getResource(name).toURI())
+        return Files.readString(path)
     }
 }
