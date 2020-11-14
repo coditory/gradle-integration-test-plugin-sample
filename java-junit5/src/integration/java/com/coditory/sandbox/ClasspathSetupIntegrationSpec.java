@@ -2,30 +2,22 @@ package com.coditory.sandbox;
 
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
+import static com.coditory.sandbox.base.ClasspathFileReader.readFile;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ClasspathSetupIntegrationSpec {
     @Test
-    public void shouldReadATxtFileFromMain() throws Exception {
+    public void shouldReadATxtFileFromMain() {
         assertEquals("main-a", readFile("a.txt"));
     }
 
     @Test
-    public void shouldReadBTxtFileFromTest() throws Exception {
+    public void shouldReadBTxtFileFromTest() {
         assertEquals("test-b", readFile("b.txt"));
     }
 
     @Test
-    public void shouldReadCTxtFileFromIntegration() throws Exception {
+    public void shouldReadCTxtFileFromIntegration() {
         assertEquals("integration-c", readFile("c.txt"));
-    }
-
-    private String readFile(String name) throws Exception {
-        Path path = Paths.get(getClass().getClassLoader().getResource(name).toURI());
-        return Files.readString(path);
     }
 }

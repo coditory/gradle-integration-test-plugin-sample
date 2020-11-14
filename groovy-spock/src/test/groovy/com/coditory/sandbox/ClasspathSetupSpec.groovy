@@ -1,10 +1,9 @@
 package com.coditory.sandbox
 
+
 import spock.lang.Specification
 
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
+import static com.coditory.sandbox.base.ClasspathFileReader.readFile
 
 class ClasspathSetupSpec extends Specification {
     def 'should read a.txt file from main'() {
@@ -20,10 +19,5 @@ class ClasspathSetupSpec extends Specification {
     def 'should read c.txt file from test'() {
         expect:
             readFile("c.txt") == "test-c"
-    }
-
-    private String readFile(String name) throws Exception {
-        Path path = Paths.get(getClass().getClassLoader().getResource(name).toURI());
-        return Files.readString(path);
     }
 }

@@ -1,10 +1,8 @@
 package com.coditory.sandbox
 
-import org.junit.jupiter.api.Test
+import com.coditory.sandbox.base.ClasspathFileReader.readFile
 import org.junit.jupiter.api.Assertions.assertEquals
-
-import java.nio.file.Files
-import java.nio.file.Paths
+import org.junit.jupiter.api.Test
 
 class ClasspathSetupSpec {
     @Test
@@ -20,10 +18,5 @@ class ClasspathSetupSpec {
     @Test
     fun shouldReadCTxtFileFromTest() {
         assertEquals("test-c", readFile("c.txt"))
-    }
-
-    private fun readFile(name: String): String {
-        val path = Paths.get(javaClass.classLoader.getResource(name).toURI())
-        return Files.readString(path)
     }
 }
