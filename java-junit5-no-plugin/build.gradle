@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+repositories {
+    mavenCentral()
+}
+
+// source: https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests
+// <<< BEGINNING OF INTEGRATION TEST CONFIGURATION WITHOUT A PLUGIN
+
+sourceSets {
+    integration {
+        compileClasspath += sourceSets.test.output + sourceSets.main.output
+        runtimeClasspath += sourceSets.test.output + sourceSets.main.output
+    }
+}
+
+configurations {
+    integrationImplementation.extendsFrom testImplementation
+    integrationRuntimeOnly.extendsFrom testRuntimeOnly
+}
+
+tasks.register('integrationTest', Test) {
+    description = 'Runs integration tests.'
+    group = 'verification'
+    testClassesDirs = sourceSets.integration.output.classesDirs
+    classpath = sourceSets.integration.runtimeClasspath
+    shouldRunAfter test
+}
+
+check.dependsOn integrationTest
+
+idea {
+    module {
+        testSourceDirs.addAll(sourceSets.integration.java.srcDirs)
+        testSourceDirs.addAll(sourceSets.integration.resources.srcDirs)
+    }
+}
+
+// >>> END
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.2"
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+    testLogging {
+        events = ["passed", "failed", "skipped"]
+        exceptionFormat = "full"
+    }
+}
