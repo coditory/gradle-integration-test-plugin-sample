@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.7.0"
-    id("com.coditory.integration-test") version "1.4.2"
+    kotlin("jvm") version "1.7.10"
+    id("com.coditory.integration-test") version "1.4.4"
 }
 
 repositories {
@@ -8,8 +8,8 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
 }
 
 tasks.withType<Test> {

@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'idea'
 }
 
 repositories {
@@ -32,18 +31,11 @@ tasks.register('integrationTest', Test) {
 
 check.dependsOn integrationTest
 
-idea {
-    module {
-        testSourceDirs.addAll(sourceSets.integration.java.srcDirs)
-        testSourceDirs.addAll(sourceSets.integration.resources.srcDirs)
-    }
-}
-
 // >>> END
 
 dependencies {
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.2"
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
 }
 
 tasks.withType(Test) {

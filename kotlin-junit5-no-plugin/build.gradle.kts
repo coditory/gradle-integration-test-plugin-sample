@@ -1,6 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.7.0"
-    idea
+    kotlin("jvm") version "1.7.10"
 }
 
 repositories {
@@ -40,20 +39,13 @@ kotlin.target.compilations.getByName("integration") {
     associateWith(target.compilations.getByName("main"))
 }
 
-idea {
-    module {
-        testSourceDirs.addAll(kotlin.sourceSets["integration"].kotlin.srcDirs)
-        testSourceDirs.addAll(kotlin.sourceSets["integration"].resources.srcDirs)
-    }
-}
-
 // >>> END
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
     // just a sample dependency to prove correctness
-    integrationImplementation("com.coditory.quark:quark-context:0.1.3")
+    integrationImplementation("com.coditory.quark:quark-context:0.1.7")
 }
 
 tasks.withType<Test> {
