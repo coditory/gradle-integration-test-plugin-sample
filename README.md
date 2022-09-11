@@ -1,5 +1,5 @@
 # Sample usage of [gradle-integration-test-plugin](https://github.com/coditory/gradle-integration-test-plugin)
-[![Build Status](https://github.com/coditory/gradle-integration-test-plugin-sample/workflows/Build/badge.svg?branch=master)](https://github.com/coditory/gradle-integration-test-plugin-sample/actions?query=workflow%3ABuild+branch%3Amaster)
+[![Build](https://github.com/coditory/gradle-integration-test-plugin-sample/actions/workflows/build.yml/badge.svg)](https://github.com/coditory/gradle-integration-test-plugin-sample/actions/workflows/build.yml)
 
 This project presents how to use [gradle-integration-test-plugin](https://github.com/coditory/gradle-integration-test-plugin)
 with different test frameworks:
