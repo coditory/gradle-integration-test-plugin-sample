@@ -1,7 +1,15 @@
+buildscript {
+    dependencies {
+        classpath files("/home/mendlik/Development/gradle/gradle-integration-test-plugin/build/libs/integration-test-plugin.jar")
+    }
+}
+
 plugins {
-    id 'com.coditory.integration-test' version '1.4.4'
+    // id 'com.coditory.integration-test' version '1.4.4'
     id 'groovy'
 }
+
+apply plugin: 'com.coditory.integration-test'
 
 repositories {
     mavenCentral()
