@@ -1,5 +1,5 @@
 plugins {
-    id 'com.coditory.integration-test' version '1.4.4'
+    id 'com.coditory.integration-test' version '1.4.5'
     id 'groovy'
 }
 
@@ -8,7 +8,13 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.spockframework:spock-core:2.2-groovy-4.0'
+    testImplementation 'org.spockframework:spock-core:2.3-groovy-4.0'
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
 }
 
 tasks.withType(Test) {
