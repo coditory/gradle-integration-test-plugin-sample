@@ -5,7 +5,6 @@ on: [pull_request, push, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -28,30 +27,6 @@ jobs:
           cache: gradle
           distribution: temurin
 
-      - name: 'Build with Gradle: groovy-spock'
+      - name: "Build with Gradle"
         if: steps.skip.outputs.should_skip != 'true'
-        run: cd groovy-spock && ./gradlew build && cd ..
-
-      - name: 'Build with Gradle: java-junit4'
-        if: steps.skip.outputs.should_skip != 'true'
-        run: cd java-junit4 && ./gradlew build && cd ..
-
-      - name: 'Build with Gradle: java-junit5'
-        if: steps.skip.outputs.should_skip != 'true'
-        run: cd java-junit5 && ./gradlew build && cd ..
-
-      - name: 'Build with Gradle: java-junit5-noplugin'
-        if: steps.skip.outputs.should_skip != 'true'
-        run: cd java-junit5-noplugin && ./gradlew build && cd ..
-
-      - name: 'Build with Gradle: kotlin-junit5'
-        if: steps.skip.outputs.should_skip != 'true'
-        run: cd kotlin-junit5 && ./gradlew build && cd ..
-
-      - name: 'Build with Gradle: kotlin-junit5-noplugin'
-        if: steps.skip.outputs.should_skip != 'true'
-        run: cd kotlin-junit5-noplugin && ./gradlew build && cd ..
-
-      - name: 'Build with Gradle: kotlin-kotest'
-        if: steps.skip.outputs.should_skip != 'true'
-        run: cd kotlin-kotest && ./gradlew build && cd ..
+        run: ./gradlew build
