@@ -42,7 +42,7 @@ kotlin.target.compilations.getByName("integration") {
 // >>> END
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.1")
     // just a sample dependency to prove correctness
     integrationImplementation("com.coditory.quark:quark-context:0.1.15")
