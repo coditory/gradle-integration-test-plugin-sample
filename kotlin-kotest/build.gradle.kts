@@ -11,7 +11,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
     testImplementation("org.amshove.kluent:kluent:1.73")
-    testImplementation("io.kotest:kotest-runner-junit5:5.9.0")
+    testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
 }
 
 kotlin {
