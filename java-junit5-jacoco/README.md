@@ -1,0 +1,1 @@
+# Java + JUnit5 + [Jacoco](https://docs.gradle.org/current/userguide/jacoco_plugin.html) + [gradle-integration-test-plugin](https://github.com/coditory/gradle-integration-test-plugin)
