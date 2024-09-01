@@ -1,5 +1,5 @@
 plugins {
-    id 'com.coditory.integration-test' version '1.4.5'
+    id 'com.coditory.integration-test' version '1.5.0'
     id 'groovy'
 }
 
@@ -8,16 +8,16 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.spockframework:spock-core:2.3-groovy-4.0'
+    testImplementation 'org.spockframework:spock-core:2.4-M4-groovy-4.0'
 }
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(11))
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
     useJUnitPlatform()
     testLogging {
         events = ["passed", "failed", "skipped"]

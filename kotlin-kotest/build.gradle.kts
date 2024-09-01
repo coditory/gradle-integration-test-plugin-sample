@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "2.0.20"
-    id("com.coditory.integration-test") version "1.4.5"
+    id("com.coditory.integration-test") version "1.5.0"
 }
 
 repositories {
@@ -16,7 +16,7 @@ dependencies {
 
 kotlin {
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(11))
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
