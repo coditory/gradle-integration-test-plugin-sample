@@ -9,7 +9,7 @@ repositories {
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.2")
     testImplementation("org.amshove.kluent:kluent:1.73")
     testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
 }
