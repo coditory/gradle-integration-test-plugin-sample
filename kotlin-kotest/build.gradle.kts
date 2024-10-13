@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "2.0.21"
-    id("com.coditory.integration-test") version "2.0.0"
+    id("com.coditory.integration-test") version "2.0.1"
 }
 
 repositories {

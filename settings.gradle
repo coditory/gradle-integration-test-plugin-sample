@@ -1,3 +1,10 @@
+pluginManagement {
+  repositories {
+    mavenLocal()
+    gradlePluginPortal()
+  }
+}
+
 rootProject.name = 'gradle-integration-test-plugin-sample'
 
 include 'groovy-spock'
