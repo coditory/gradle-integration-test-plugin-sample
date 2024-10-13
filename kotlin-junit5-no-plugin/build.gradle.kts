@@ -1,63 +1,57 @@
 plugins {
     kotlin("jvm") version "2.0.20"
+    `jvm-test-suite`
 }
 
 repositories {
     mavenCentral()
 }
 
-// source: https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests
-// <<< BEGINNING OF INTEGRATION TEST CONFIGURATION WITHOUT A PLUGIN
-
-sourceSets {
-    create("integration") {
-        compileClasspath += sourceSets.test.get().output
-        runtimeClasspath += sourceSets.test.get().output
+testing {
+    @Suppress("UnstableApiUsage")
+    suites {
+        withType<JvmTestSuite> {
+            useJUnitJupiter()
+            targets.configureEach {
+                testTask {
+                    testLogging {
+                        events("passed", "failed", "skipped")
+                        setExceptionFormat("full")
+                    }
+                }
+            }
+        }
+        val test by getting(JvmTestSuite::class)
+        val integrationTest by registering(JvmTestSuite::class) {
+            testType.set(TestSuiteType.INTEGRATION_TEST)
+            targets.all {
+                testTask.configure {
+                    shouldRunAfter(test)
+                }
+            }
+        }
     }
 }
 
-val integrationImplementation by configurations.getting {
-    extendsFrom(configurations.testImplementation.get())
+tasks.named("check") {
+    dependsOn(testing.suites.named("integrationTest"))
 }
 
-val integrationRuntimeOnly by configurations.getting {
-    extendsFrom(configurations.testRuntimeOnly.get())
+kotlin {
+    jvmToolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    target.compilations {
+        getByName("integrationTest")
+            .associateWith(getByName("test"))
+    }
 }
 
-val integrationTest = task<Test>("integrationTest") {
-    description = "Runs integration tests."
-    group = "verification"
-    testClassesDirs = sourceSets["integration"].output.classesDirs
-    classpath = sourceSets["integration"].runtimeClasspath
-    shouldRunAfter("test")
-}
-
-tasks.check { dependsOn(integrationTest) }
-
-kotlin.target.compilations.getByName("integration") {
-    associateWith(target.compilations.getByName("test"))
-    associateWith(target.compilations.getByName("main"))
-}
-
-// >>> END
+val integrationTestImplementation by configurations
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.0")
     // just a sample dependency to prove correctness
-    integrationImplementation("com.coditory.quark:quark-context:0.1.15")
-}
-
-kotlin {
-    jvmToolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
-    testLogging {
-        events("passed", "failed", "skipped")
-        setExceptionFormat("full")
-    }
+    integrationTestImplementation("com.coditory.quark:quark-context:0.1.15")
 }

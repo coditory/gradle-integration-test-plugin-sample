@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
-    id 'com.coditory.integration-test' version '1.5.0'
+    id("com.coditory.integration-test") version "2.0.0"
 }
 
 repositories {
@@ -15,7 +15,7 @@ dependencies {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -27,6 +27,6 @@ tasks.withType(Test).configureEach {
     }
 }
 
-jacocoTestReport {
-    executionData(fileTree(project.layout.buildDirectory).include("jacoco/*.exec"))
-}
+//jacocoTestReport {
+//    executionData(fileTree(project.layout.buildDirectory).include("jacoco/*.exec"))
+//}

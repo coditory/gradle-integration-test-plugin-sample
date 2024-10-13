@@ -1,41 +1,47 @@
 plugins {
     id 'java'
+    id 'jvm-test-suite'
 }
 
 repositories {
     mavenCentral()
 }
 
-// source: https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests
-// <<< BEGINNING OF INTEGRATION TEST CONFIGURATION WITHOUT A PLUGIN
+testing {
+    suites {
+        configureEach {
+            useJUnitJupiter()
+            targets.configureEach {
+                testTask.configure {
+                    testLogging {
+                        events = ["passed", "failed", "skipped"]
+                        exceptionFormat = "full"
+                    }
+                }
+            }
+        }
 
-sourceSets {
-    integration {
-        compileClasspath += sourceSets.test.output + sourceSets.main.output
-        runtimeClasspath += sourceSets.test.output + sourceSets.main.output
+        integrationTest(JvmTestSuite) {
+            testType = TestSuiteType.INTEGRATION_TEST
+
+            sources {
+                compileClasspath += sourceSets.test.output + sourceSets.main.output
+                runtimeClasspath += sourceSets.test.output + sourceSets.main.output
+            }
+
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(test)
+                    }
+                }
+            }
+        }
     }
 }
 
-configurations {
-    integrationImplementation.extendsFrom testImplementation
-    integrationRuntimeOnly.extendsFrom testRuntimeOnly
-}
-
-tasks.register('integrationTest', Test) {
-    description = 'Runs integration tests.'
-    group = 'verification'
-    testClassesDirs = sourceSets.integration.output.classesDirs
-    classpath = sourceSets.integration.runtimeClasspath
-    shouldRunAfter test
-}
-
-check.dependsOn integrationTest
-
-// >>> END
-
-dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.0")
+tasks.named('check') {
+    dependsOn(testing.suites.integrationTest)
 }
 
 tasks.withType(Test).configureEach {
@@ -44,4 +50,11 @@ tasks.withType(Test).configureEach {
         events = ["passed", "failed", "skipped"]
         exceptionFormat = "full"
     }
+}
+
+dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.11.0")
+    // just a sample dependency to prove correctness
+    integrationTestImplementation("com.coditory.quark:quark-context:0.1.15")
 }
