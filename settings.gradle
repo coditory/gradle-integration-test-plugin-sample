@@ -6,11 +6,3 @@ pluginManagement {
 }
 
 rootProject.name = 'gradle-integration-test-plugin-sample'
-
-include 'groovy-spock'
-include 'java-junit5'
-include 'java-junit5-no-plugin'
-include 'java-junit5-jacoco'
-include 'kotlin-junit5'
-include 'kotlin-junit5-no-plugin'
-include 'kotlin-kotest'
